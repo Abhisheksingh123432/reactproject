@@ -1,0 +1,35 @@
+.barchart1 canvas{
+    display: block; width: 302px; height: 151px;
+}
+.loadercls{
+    font-size: 20px;
+   
+    position: fixed !important;
+    z-index: 4000;
+    opacity: 0.9;
+    
+   
+    justify-content: center !important;
+    margin-left: -width;
+    margin-top: -height;
+}
+.loaderclsdiv{
+    position: absolute !important;
+    width:100%;
+    height:auto;
+    padding: 50vh 50vw ;
+    background: #1614147a !important;
+    z-index: 4000;
+    height: auto ;
+    display: flex;
+    justify-content: center !important;
+}
+.parentdiv{
+    position: fixed;
+    z-index: 3000;
+
+}
+.react-confirm-alert-body > h1 {
+    margin-top: 0;
+    font-size: 25px;
+}
