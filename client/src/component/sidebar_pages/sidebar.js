@@ -245,7 +245,7 @@ function Sidebar() {
               className="nav-link"
               data-toggle="collapse"
               to="/pendinorderlist"
-            >
+            >adasadddddd
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Pending Reviews</span>
             </Link>
