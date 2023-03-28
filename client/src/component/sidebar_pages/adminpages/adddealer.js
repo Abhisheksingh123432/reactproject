@@ -6,8 +6,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import config from "../../../config";
 import {Navigation} from "../../pages/header";
+import ClipLoader from "react-spinners/ClipLoader";
 function AddDealer() {
   const navigate = useNavigate();
+  let   [loadingInProgress, setLoading] = useState(false);
   const [staffid, setstaffid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,11 +24,9 @@ function AddDealer() {
   const [image, setImage] = useState("");
   const [staff, setstaff] = useState("");
   const [role, setrole] = useState("");
-  const onFileChange = (e) => {
-    console.log(e.target.files[0]);
-    setImage(e.target.files[0]);
-  };
+  
   let handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     let formData = new FormData(); //formdata object
 
@@ -45,7 +45,7 @@ function AddDealer() {
 
     //api call starts using axios
     axios
-      .post(`${config.backend_URL}/api/formdata`, formData)
+      .post(`${config.backend_URL}/api/formdata1`, formData)
       .then(async (data) => {
         console.log(data.data);
         if (data.status) {
@@ -60,10 +60,12 @@ function AddDealer() {
           setNumber("");
           setAddress("");
           setImage("");
-
+          setLoading(false);
           toast(data.data.msg);
+
         } else {
           toast(data.data.msg);
+          setLoading(false)
           e.target.reset();
         }
       })
@@ -99,7 +101,7 @@ function AddDealer() {
   }, [role]);
   console.log("price is dataprice",staffid)
   return (
-    <>
+    <>{loadingInProgress ? <div className="parentdiv"><div className="loaderclsdiv"><ClipLoader className="loadercls" text-align="center" color={'#000'} loading={loadingInProgress}  size={35} /></div></div>: ""}
     <Navigation/>
       <ToastContainer />
       <div class="container-fluid page-body-wrapper">
@@ -380,7 +382,7 @@ function AddDealer() {
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="exampleInputEmail3">Email address</label>
+                        <label for="exampleInputEmail3">Email Address</label>
                         <input
                           required
                           type="email"
@@ -393,7 +395,7 @@ function AddDealer() {
                       </div>
                      
                       <div class="form-group col-md-6">
-                        <label for="exampleInputName1">Select staff</label>
+                        <label for="exampleInputName1">Select Staff</label>
                         <select
                                       class="form-control"
                                       id="options"
@@ -401,7 +403,7 @@ function AddDealer() {
                                       value={staffid}
                                     >
                                       <option value="" disabled selected>
-                                        Select Product Name
+                                        Select Staff 
                                       </option>
                                       {products.map((userdata, index) => {
                                         return (
@@ -413,7 +415,7 @@ function AddDealer() {
                                     </select>
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="exampleInputName1">whats app number</label>
+                        <label for="exampleInputName1">Whatsapp number</label>
                         <input
                           required
                           type="number"
@@ -421,11 +423,11 @@ function AddDealer() {
                           value={number}
                           onChange={(e) => setNumber(e.target.value)}
                           id="exampleInputCity"
-                          placeholder="whats app number"
+                          placeholder="Whatsapp number"
                         />
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="exampleInputName1">address</label>
+                        <label for="exampleInputName1">Address</label>
                         <input
                           required
                           type="text"
@@ -433,11 +435,11 @@ function AddDealer() {
                           value={address}
                           onChange={(e) => setAddress(e.target.value)}
                           id="exampleInputAddress"
-                          placeholder="address"
+                          placeholder="Address"
                         />
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="exampleInputName1">pin code</label>
+                        <label for="exampleInputName1">Pin code</label>
                         <input
                           required
                           type="number"
@@ -445,10 +447,10 @@ function AddDealer() {
                           value={pincode}
                           onChange={(e) => setPincode(e.target.value)}
                           id="exampleInputAddress"
-                          placeholder="pin code"
+                          placeholder="Pin code"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      {/* <div class="form-group col-md-6">
                         <label for="exampleInputPassword4">Username</label>
                         <input
                           required
@@ -459,7 +461,7 @@ function AddDealer() {
                           id="exampleInputUsername"
                           placeholder="Username"
                         />
-                      </div>
+                      </div> */}
 
                       <div class="form-group col-md-6">
                         <label for="exampleInputPassword4">Password</label>
@@ -474,7 +476,7 @@ function AddDealer() {
                         />
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="exampleInputName1">dealer code</label>
+                        <label for="exampleInputName1">Dealer code</label>
                         <input
                           required
                           type="text"
@@ -482,7 +484,7 @@ function AddDealer() {
                           value={dealercode}
                           onChange={(e) => setDealercode(e.target.value)}
                           id="exampleInputDealercode"
-                          placeholder="dealer code"
+                          placeholder="Dealer code"
                         />
                       </div>
                     {/*   <div class="form-group">
@@ -512,7 +514,7 @@ function AddDealer() {
                         />
                       </div>
                       <div class="form-group col-md-12 ">
-                        <label for="exampleTextarea1">notes</label>
+                        <label for="exampleTextarea1">Notes</label>
                         <textarea
                           class="form-control"
                           value={notes}
@@ -524,7 +526,7 @@ function AddDealer() {
                       <button type="submit" class="btn btn-primary mr-2">
                         Submit
                       </button>
-                      <button class="btn btn-light">Cancel</button>
+                 
                     </form>
                   </div>
                 </div>

@@ -4,7 +4,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Sidebar } from "../sidebar";
 import config from "../../../config";
+import ClipLoader from "react-spinners/ClipLoader";
 function AddStaff() {
+  let   [loadingInProgress, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const [location, setlocation] = useState("");
@@ -22,6 +24,7 @@ function AddStaff() {
     setImage(e.target.files[0]);
   };
   let handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     let formData = new FormData(); //formdata object
 
@@ -57,9 +60,12 @@ function AddStaff() {
           setImage("");
 
           toast(data.data.msg);
+          setLoading(false)
         } else {
           toast(data.data.msg);
           e.target.reset();
+          setLoading(false)
+
         }
       })
       .catch((err) => {
@@ -79,7 +85,7 @@ function AddStaff() {
     fetchData();
   }, []);
   
-  return (<><Navigation/><ToastContainer/>
+  return (<>{loadingInProgress ? <div className="parentdiv"><div className="loaderclsdiv"><ClipLoader className="loadercls" text-align="center" color={'#000'} loading={loadingInProgress}  size={35} /></div></div>: ""}<Navigation/><ToastContainer/>
     <div class="container-fluid page-body-wrapper">
       <div class="theme-setting-wrapper">
         <div id="settings-trigger">
@@ -341,27 +347,27 @@ function AddStaff() {
                       />
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="exampleInputEmail3">staff designation</label>
+                      <label for="exampleInputEmail3">Staff Designation</label>
                       <input
                         type="text"
                         class="form-control"
                         id="exampleInputEmail3"
-                        placeholder="staff designation"
+                        placeholder="Staff Designation"
                         value={designation} onChange={(e) => setDesignation(e.target.value)} 
                       />
 
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="exampleInputName1">email</label>
+                      <label for="exampleInputName1">Email</label>
                       <input
                         type="email"
                         class="form-control"
                         id="exampleInputName1"
-                        placeholder="email"
+                        placeholder="Email"
                         value={email} onChange={(e) => setemail(e.target.value)}
                       />
                       </div>
-                    <div class="form-group col-md-6">
+                    {/* <div class="form-group col-md-6">
                         <label for="exampleInputPassword4">Username</label>
                         <input
                           required
@@ -372,7 +378,7 @@ function AddStaff() {
                           id="exampleInputUsername"
                           placeholder="Username"
                         />
-                      </div>
+                      </div> */}
                     <div class="form-group col-md-6">
                       <label for="exampleInputPassword4">Password</label>
                       <input
@@ -385,7 +391,7 @@ function AddStaff() {
                       />
                     </div>
                     <div class="form-group col-md-6">
-                     <label for="exampleSelectGender">location</label>
+                     <label for="exampleSelectGender">Location</label>
                       
                     <input
                         type="password"
@@ -393,15 +399,15 @@ function AddStaff() {
                         onChange={(e) =>  setlocation (e.target.value)}
                         class="form-control"
                         id="exampleInputPassword4"
-                        placeholder="location"
+                        placeholder="Location"
                       />
                     </div>
                     <div class="form-group col-md-6">
                       <label for="exampleSelectGender">Role type</label>
                       <select required class="form-control" id="options"  onChange={(e) =>setRole(e.target.value)} value={role}>
-                       <option value="" disabled selected>Select a role</option>
+                       <option value="" disabled selected>Select a Role</option>
                        
-                       <option value="1"> Executive</option>
+                       <option value="1">Executive</option>
                        <option value="2">Field Executive </option>
                       </select>
                       
@@ -436,7 +442,7 @@ function AddStaff() {
                     <button type="submit" class="btn btn-primary mr-2">
                       Submit
                     </button>
-                    <button class="btn btn-light">Cancel</button>
+                  
 
                   </form>
                 </div>

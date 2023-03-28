@@ -320,7 +320,7 @@ function Sidebar() {
                 </li>
                 <li class="nav-item">
                   {" "}
-                  <Link className="nav-link" to="/dealerlist">
+                  <Link className="nav-link" to="/staffdealerlist">
                     {" "}
                     Dealer list
                   </Link>

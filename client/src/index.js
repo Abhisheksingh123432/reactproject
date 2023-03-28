@@ -27,7 +27,7 @@ import { Dispatchstatus} from "./component/sidebar_pages/dealerpages/dispatchsta
 import { DispatchSts} from "./component/sidebar_pages/dealerpages/orderstatus";
 import { OrderHistory} from "./component/sidebar_pages/dealerpages/Orderhistory";
 import { Orderliststaff} from "./component/sidebar_pages/staffpages/orderlist";
-import { AddDealerstaff} from "./component/sidebar_pages/staffpages/adddealer";
+import { AddDealerstaff} from "./component/sidebar_pages/staffpages/adddealer"; 
 import { PostStaffPdf} from "./component/sidebar_pages/staffpages/Uploadpdf";
 import { SDealerlist} from "./component/sidebar_pages/staffpages/dealerlist";
 ReactDOM.render( 

@@ -6,8 +6,8 @@ import config from "../../../config";
 
 import { useNavigate } from "react-router-dom";
 import {Navigation} from "../../pages/header";
-import moment from "moment";
-import { ToastContainer, toast } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
+import { ToastContainer } from "react-toastify"; 
 
 function DispatchSts() {
   const queryParams = new URLSearchParams(window.location.search);
@@ -15,6 +15,7 @@ function DispatchSts() {
     JSON.parse(localStorage.getItem("UserData"))
   );
   const id = queryParams.get("id");
+  let   [loadingInProgress, setLoading] = useState(false);
   const [role, setrole] = useState("");
   const [orders, setorders] = useState([]);
   const [status, setStatus] = useState("");
@@ -24,9 +25,11 @@ function DispatchSts() {
   console.log("status:", status);
   const fetchData = () => {
     console.log(id);
-    return fetch(`${config.backend_URL}/api/Orderstatusa?id=${user.Dealer_Id}`)
+    return setLoading(true) , fetch(`${config.backend_URL}/api/Orderstatusa?id=${user.Dealer_Id}`)
       .then((response) => response.json())
-      .then((data) => setorders(data.data));
+      .then((data) => setorders(data.data), setTimeout(() => {
+        setLoading(false);
+      }, 1000));
   };
   console.log("orders", orders);
   useEffect(() => {
@@ -63,7 +66,7 @@ function DispatchSts() {
     }
   }
   return (
-    <><Navigation/>
+    <><Navigation/>{loadingInProgress ? <div className="parentdiv"><div className="loaderclsdiv"><ClipLoader className="loadercls" text-align="center" color={'#000'} loading={loadingInProgress}  size={35} /></div></div>: ""}
     <div class="container-fluid page-body-wrapper">
       <ToastContainer />
 
@@ -421,7 +424,7 @@ function DispatchSts() {
                                 {
                                   orderdata.orderdata_status=="0"
                                     ? "In Process"
-                                    :orderdata.orderdata_status=="4"? "Successful":orderdata.orderdata_status=="2"? "Dispached":""
+                                    :orderdata.orderdata_status=="4"? "Successful":orderdata.orderdata_status=="2"? "Dispached":orderdata.orderdata_status=="3"? "Not in Stock":orderdata.orderdata_status=="1"? "Packing":""
                                 }
                               </td>
                               <td>

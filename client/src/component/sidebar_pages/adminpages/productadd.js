@@ -255,11 +255,11 @@ function AddPoduct() {
                     </div>
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail3">Price</label>
-                      <input type="number" name="price" value={price} onChange={(e) => setPrice(e.target.value)}  class="form-control" id="exampleInputEmail3" placeholder="price"/>
+                      <input type="number" name="price" value={price} onChange={(e) => setPrice(e.target.value)}  class="form-control" id="exampleInputEmail3" placeholder="Price"/>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="exampleInputPassword4"> Description</label>
-                      <input type="text" name="discription" value={discription} onChange={(e) => setDiscription(e.target.value)} class="form-control" id="exampleInputPassword4" placeholder="discription"/>
+                      <input type="text" name="discription" value={discription} onChange={(e) => setDiscription(e.target.value)} class="form-control" id="exampleInputPassword4" placeholder="Description"/>
                     </div>
                     <div class="form-group col-md-6">
                     <label for="exampleInputPassword4"> Units</label>
@@ -271,7 +271,7 @@ function AddPoduct() {
                     </div>
                     <div class="form-group col-md-6">
                     <label for="exampleInputPassword4 ">Quantity</label>
-                      <input type="text" name="discription" value={quantity} onChange={(e) => setquantity(e.target.value)} class="form-control" id="exampleInputPassword4" placeholder="Quantity"/>
+                      <input type="number" name="discription" value={quantity} onChange={(e) => setquantity(e.target.value)} class="form-control" id="exampleInputPassword4" placeholder="Quantity"/>
                     </div>
                   {/*   <div class="form-group">
                       <label>File upload</label>
@@ -284,7 +284,7 @@ function AddPoduct() {
                     </div>
                     
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                  
                   </form>
                 </div>
               </div>

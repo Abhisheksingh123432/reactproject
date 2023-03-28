@@ -4,11 +4,12 @@ import {Navigation} from "../../pages/header";
 import { useEffect, useState } from "react";
 import config from "../../../config";
 import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
 
-import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 
 function Vieworder() {
+  let   [loadingInProgress, setLoading] = useState(false);
   const queryParams = new URLSearchParams(window.location.search);
   const id = queryParams.get("id");
 
@@ -19,7 +20,7 @@ function Vieworder() {
 
   const setproduct = (id,option) => {
    
-  
+    setLoading(true) ;
     let formData = new FormData();
 
     formData.append("status", option);
@@ -33,14 +34,14 @@ function Vieworder() {
          if (data.data.status) {
      
           if (data.data.status) {
-       
+            setLoading(false) ;
           toast(data.data.msg);
-          
+          window.location.reload(true);
         }    
           
         } else {
           toast(data.data.msg);
-         
+          setLoading(false) ;
         }
       })
       .catch((err) => {
@@ -51,9 +52,11 @@ function Vieworder() {
   console.log("status:", status);
   const fetchData = () => {
     console.log(id);
-    return fetch(`${config.backend_URL}/api/orderdatalist?id=${id}`)
+    return setLoading(true) , fetch(`${config.backend_URL}/api/orderdatalist?id=${id}`)
       .then((response) => response.json())
-      .then((data) => setorders(data.data));
+      .then((data) => setorders(data.data),setTimeout(() => {
+        setLoading(false);
+      }, 1000));
   };
   console.log("orders", orders);
   useEffect(() => {
@@ -62,7 +65,7 @@ function Vieworder() {
 
 
   return (
-    <>
+    <>{loadingInProgress ? <div className="parentdiv"><div className="loaderclsdiv"><ClipLoader className="loadercls" text-align="center" color={'#000'} loading={loadingInProgress}  size={35} /></div></div>: ""}
       <Navigation />
       <div class="container-fluid page-body-wrapper">
         <ToastContainer />

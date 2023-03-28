@@ -14,7 +14,9 @@ function Dealerlist() {
   const fetchData = () => {
     return setLoading(true) , fetch(`${config.backend_URL}/api/test`)
       .then((response) => response.json())
-      .then((data) => setUser(data.data) , setLoading(false));
+      .then((data) => setUser(data.data) , setTimeout(() => {
+        setLoading(false);
+      }, 1000));
   };
 
   console.log("user", user);
@@ -327,7 +329,7 @@ function Dealerlist() {
                           <th>City</th>
                           <th>Email</th>
                           <th>Phone no.</th>
-                          <th>Username</th>
+                          {/* <th>Username</th> */}
                           <th>Password</th>
                           <th>Operations</th>
                         </tr>
@@ -367,7 +369,7 @@ function Dealerlist() {
                               </td>
                               <td>  {userdata.Dealer_Email  ? userdata.Dealer_Email: ""}</td>
                               <td>  {userdata.Dealer_Number  ? userdata.Dealer_Number: ""}</td>
-                              <td>  {userdata.Dealer_Username  ? userdata.Dealer_Username: ""}</td>
+                              {/* <td>  {userdata.Dealer_Username  ? userdata.Dealer_Username: ""}</td> */}
                               <td>  {userdata.Dealer_Password  ? userdata.Dealer_Password: ""}</td>
                               <td>
                                 <button type="button" className="buttonedit">

@@ -5,7 +5,7 @@ import  { useEffect, useState } from "react";
 import config from "../../../config";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import {Navigation} from "../../pages/header";
+import {Navigation} from "../../pages/header"; 
 import { confirmAlert } from "react-confirm-alert";
 import ClipLoader from "react-spinners/ClipLoader";
 function Stafflist() {
@@ -14,7 +14,9 @@ function Stafflist() {
   const fetchData = () => {
     return setLoading(true) , fetch(`${config.backend_URL}/api/stafflist`)
           .then((response) => response.json())
-          .then((data) => setUser(data.data) , setLoading(false));
+          .then((data) => setUser(data.data) , setTimeout(() => {
+            setLoading(false);
+          }, 1000));
           
   }
   useEffect(() => {
@@ -38,7 +40,7 @@ function Stafflist() {
       ]
     });}
   const deletedata=(id)=>{
-    console.log(id)
+    
    
       
       let formData = new FormData(); //formdata object  
@@ -259,7 +261,7 @@ function Stafflist() {
                           <th>Email</th>
                           <th>Roletype</th>
                           
-                          <th>Username</th>
+                          {/* <th>Username</th> */}
                           <th>Password</th>
                           <th>Operations</th>
                         </tr>
@@ -299,7 +301,7 @@ function Stafflist() {
                               </td>
                               <td>  {userdata.staff_roletype=="1"  ? "Executive":userdata.staff_roletype=="2"? "Field Executive":""}</td>
                               
-                              <td>  {userdata.staff_username  ? userdata.staff_username: ""}</td>
+                              {/* <td>  {userdata.staff_username  ? userdata.staff_username: ""}</td> */}
                               <td>  {userdata.staff_password  ? userdata.staff_password: ""}</td>
                               <td>
                                 <button type="button" className="buttonedit">

@@ -15,36 +15,13 @@ function Orderliststaff() {
   let   [loadingInProgress, setLoading] = useState(false);
   const [orders, setorders] = useState([]);
   console.log("orders", orders);
-  const columns = [
-    {
-        name: 'Id',
-        selector: row => row.order_id,
-        sortable: true,
-    },
-    {
-        name: 'Dealer_Name',
-        selector: row => row.Dealer_Name,
-        sortable: true,
-    },
-];
-
-const data = [
-  {
-      id: 1,
-      title: 'Beetlejuice',
-      year: '1988',
-  },
-  {
-      id: 2,
-      title: 'Ghostbusters',
-      year: '1984',
-  },
-]
-
+  
   const fetchData = () => {
     return setLoading(true) ,fetch(`${config.backend_URL}/api/orderlist`)
           .then((response) => response.json())
-          .then((data) => setorders(data.data), setLoading(false));
+          .then((data) => setorders(data.data), setTimeout(() => {
+            setLoading(false);
+          }, 1000));
           
   }
   useEffect(() => {

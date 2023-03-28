@@ -15,7 +15,9 @@ function ProductList() {
     
     return setLoading(true) ,fetch(`${config.backend_URL}/api/productlist`)
       .then((response) => response.json())
-      .then((data) => setdata(data.data), setLoading(false));
+      .then((data) => setdata(data.data),setTimeout(() => {
+        setLoading(false);
+      }, 1000));
       
   }; 
   let confirmit = async (id) => {

@@ -3,18 +3,23 @@ import { Sidebar } from "../sidebar_pages/sidebar";
 import { useNavigate } from "react-router-dom";
 import config from "../../config";
 import { Navigation } from "../pages/header";
-import {BarChart,PieChart} from "../pages/chart"
+import {BarChart,PieChart} from "../pages/chart";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./home.css";
 function Home() {
   const navigate = useNavigate();
+  let   [loadingInProgress, setLoading] = useState(false);
   const [role, setrole] = useState("");
   const [user, setuser] = useState([]);
   const [count, setCount] = useState([]);
   console.log("data is count home:", count);
+  
   const fetchData = () => {
-    return fetch(`${config.backend_URL}/api/dealerCount`)
+    return setLoading(true),fetch(`${config.backend_URL}/api/dealerCount`)
       .then((response) => response.json())
-      .then((data) => setCount(data.data));
+      .then((data) => setCount(data.data)),setTimeout(() => {
+        setLoading(false);
+      }, 1000);
   };
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("status")) == true) {
@@ -22,6 +27,7 @@ function Home() {
       setuser(JSON.parse(localStorage.getItem("UserData")));
       console.log("data is role home:", role);
       console.log("data is user home:", user);
+    
       fetchData();
     } else {
       navigate("/login");
@@ -29,7 +35,7 @@ function Home() {
   }, [role]);
   
   return (
-    <>
+    <> {loadingInProgress ? <div className="parentdiv"><div className="loaderclsdiv"><ClipLoader className="loadercls" text-align="center" color={'#000'} loading={loadingInProgress}  size={35} /></div></div>: ""}
       <Navigation />
       <div className="container-scroller">
         <div className="container-fluid page-body-wrapper">

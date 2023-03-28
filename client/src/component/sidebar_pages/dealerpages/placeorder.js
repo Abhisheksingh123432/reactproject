@@ -79,7 +79,7 @@ function AddOrderfile() {
   };
   let handleSubmitproductarray = async () => {
     
-    alert("buttonclicked")
+    
     setLoading(true);
     let formData = new FormData(); //formdata object
     // formData.append("order_dealer", user.Dealer_Id);
@@ -93,7 +93,8 @@ function AddOrderfile() {
         if (data.status) {
           setLoading(false)
           toast(data.data.msg);
-          setarr([{ productname: "", producQuanity: "1", price: 0,key:1 }])
+          setarr([{ productname: "", producQuanity: "1", price: 0,key:1 }]);
+          setquantitysate("1");
         } else {
           setLoading(false)
           toast(data.data.msg);
@@ -154,7 +155,7 @@ const [prodctsate, setprodctsate] = useState([name]);
 const [quantitysate, setquantitysate] = useState([quantity]);
 const [priceselect, setpriceselect] = useState(0);
 const addUrl = (e) => {
-  alert('manish',quantitysate);
+
   let arr = arr1;
   arr.push({
     productname: "",
@@ -188,7 +189,7 @@ const   handleChangeselect=(e,i,pr)=>{
     }
   });
   setprodctsate(nextCounters);
-  setStatus(status+1)
+  setStatus(status+1)         
  
   // alert(e.target.getAttibute('value'))
  // console.log("price is e.target.dataprice",e.target.getAttribute("data-price"))

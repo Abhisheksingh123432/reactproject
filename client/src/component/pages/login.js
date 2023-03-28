@@ -70,7 +70,7 @@ function Login() {
                 style={{ textAlign: "center" }}
               >
                 <div className="col-lg-12 mx-auto  ">
-                  <img
+                <img
                     src="../../images/logo.3d432ca2.svg"
                     alt="logo"
                     class="jss3"
@@ -146,14 +146,7 @@ function Login() {
                   <div className="mt-3">
                     <button className="btnlogin" type="submit"> SIGN IN</button>
                   </div>
-                  <div className="my-2 d-flex justify-content-between align-items-center">
-                    <div className="form-check">
-                      <label className="form-check-label text-muted"></label>
-                    </div>
-                    <a href="#" className="auth-link text-black">
-                      Forgot password?
-                    </a>
-                  </div>
+                 
 
                   {/* <div className="text-center mt-4 font-weight-light">
                   Don't have an account? <a href="/register" className="text-primary">Create</a>

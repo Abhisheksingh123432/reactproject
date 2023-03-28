@@ -19,7 +19,9 @@ function DealerOrderlist() {
     const userdata= JSON.parse(localStorage.getItem("UserData"));
     return setLoading(true) ,fetch(`${config.backend_URL}/api/orderlistdealer?id=${userdata.Dealer_Id}`)
           .then((response) => response.json())
-          .then((data) => setorders(data.data), setLoading(false));         
+          .then((data) => setorders(data.data), setTimeout(() => {
+            setLoading(false);
+          }, 1000));         
   }
   useEffect(() => { 
     

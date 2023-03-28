@@ -18,7 +18,9 @@ function SDealerlist() {
   const fetchData = () => {
     return setLoading(true) ,  fetch(`${config.backend_URL}/api/staffDealers?id=${staff}`)
       .then((response) => response.json())
-      .then((data) => setUser(data.data) , setLoading(false));
+      .then((data) => setUser(data.data) , setTimeout(() => {
+        setLoading(false);
+      }, 1000));
   };
 
   console.log("user", user);

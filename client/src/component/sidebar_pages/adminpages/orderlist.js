@@ -17,7 +17,9 @@ function Orderlist() {
   const fetchData = () => {
     return setLoading(true) , fetch(`${config.backend_URL}/api/orderlist`)
           .then((response) => response.json())
-          .then((data) => setorders(data.data),setLoading(false) );
+          .then((data) => setorders(data.data), setTimeout(() => {
+            setLoading(false);
+          }, 1000) );
           
   }
   useEffect(() => {
