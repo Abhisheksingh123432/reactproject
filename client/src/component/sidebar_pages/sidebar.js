@@ -16,7 +16,7 @@ function Sidebar() {
         <li class="nav-item">
           <Link className="nav-link" to="/home">
             <i class="icon-grid menu-icon"></i>
-            <span class="menu-title">Dashboard</span>
+            <span class="menu-title">Dashboardj</span>
           </Link>
         </li>
         {/* for admin sidebar_pages */}
